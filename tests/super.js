@@ -18,8 +18,8 @@ chai.use(chaiHttp)
  */
 after((done) => {
   // required because https://github.com/Automattic/mongoose/issues/1251#issuecomment-65793092
-  mongoose.models = {}
-  mongoose.modelSchemas = {}
-  mongoose.connection.close()
-  done()
+    mongoose.models = {}
+    mongoose.modelSchemas = {}
+    mongoose.connection.close()
+    done()
 })
