@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/MaxIsWell42/superheroAPI#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "chai": "^4.3.3",
     "chai-http": "^4.3.0",

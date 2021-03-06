@@ -8,4 +8,5 @@ const SuperSchema = new Schema({
     // stats: { type: [], required: true }
 })
 
+
 module.exports = mongoose.model("Super", SuperSchema);
