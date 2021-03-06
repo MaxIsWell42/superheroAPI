@@ -47,7 +47,6 @@ app.set('view engine', 'handlebars')
 
 // Controllers
 require('./controllers/matchup.js')(app);
-require('./controllers/superhero.js')(app);
 require('./controllers/auth.js')(app);
 
 // Run on port
