@@ -1,37 +1,47 @@
 const Super = require('../models/super');
 const Matchup = require('../models/matchup')
-const url = 'https://superheroapi.com/api/' + process.env.API_KEY + '/';
-const axios = require('axios');
-// const GetSuper = require('../util/getSuper')
+const URL = 'https://superheroapi.com/api/' + process.env.API_KEY + '/';
+const fetch = require("node-fetch");
+// const GetSupers = require('../util/GetSupers')
 
-function GetSuper() {
+function GetSupers() {
     // Get a random number between 1 and 300
     function getRandomInt() {
         return Math.floor(Math.random() * 300) + 1
     }
 
-    console.log("any random string")
-
+    // Do this in function 
     var id1 = getRandomInt()
     var id2 = getRandomInt()
     if (id1 == id2) {
         id2 + 1
     }
-    
-    console.log(id1)
-    console.log(id2)
-    
-    function apiCall(id) {
-        axios.get(url + id)
-            .then(data=>{
-                console.log(data)
-                return data
-            })
-            .catch(err=>console.log(err))
+
+    async function apiCall(id) {
+        return fetch(URL + id)
+    //         .then(response => {
+    //             console.log("Returns a response")
+    //             return response.json()
+    //         })
+    //         // .then(data => console.log(data))
+    //         .catch((error) => {
+    //             console.error('Error:', error);
+    //         });
     }
+
+    // console.log("hello")
     hero1 = apiCall(id1)
     hero2 = apiCall(id2)
-    return hero1, hero2
+    Promise.all([hero1, hero2]).then(data => {
+        const dataFromPromise1 = data[0]
+        const dataFromPromise2 = data[1]
+        console.log(data[0].json())
+        console.log(data[1].json())
+        return data
+    })
+    // console.log(hero1.data)
+    // console.log(hero2.data)
+
 }
 
 module.exports = (app) => {
@@ -39,7 +49,7 @@ module.exports = (app) => {
     app.get('/', (req, res) => {
         var currentUser = req.user;
 
-        console.log(req.cookies);
+        // console.log(req.cookies);
         res.render('matchup', { currentUser });
     })
     // New Matchup
@@ -50,19 +60,21 @@ module.exports = (app) => {
         matchup.downVotes = [];
         matchup.voteScore = 0;
         
-        console.log("going to route")
-        var super1data, super2data = GetSuper()
+        heroes = GetSupers()
+        console.log(heroes)
+        super1data = heroes[0]
+        super2data = heroes[1]
 
         var super1 = {
-            name: super1data.data.name,
-            origin: super1data.data.connections,
-            image: super1data.data.image
+            // name: super1data.name,
+            // origin: super1data.connections,
+            // image: super1data.image.url,
         }
 
         var super2 = {
-            name: super2data.data.name,
-            origin: super2data.data.connections,
-            image: super2data.data.image
+            // name: super2data,
+            // origin: super2data,
+            // image: super2data
         }
 
         Super.find({}).lean()
@@ -72,7 +84,10 @@ module.exports = (app) => {
         .catch(err => {
             console.log(err.message);
         })
+
+        matchup.save()
     })
+
     app.put("/matchup/:id/vote-up", function(req, res) {
         Post.findById(req.params.id).exec(function(err, post) {
             matchup.upVotes.push(req.user._id);

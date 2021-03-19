@@ -8,8 +8,6 @@ module.exports = getSupers => {
             return Math.floor(Math.random() * 300) + 1
         }
 
-        console.log("any random string")
-
         var id1 = getRandomInt()
         var id2 = getRandomInt()
         if (id1 == id2) {
