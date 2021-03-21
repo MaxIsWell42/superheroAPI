@@ -1,10 +1,8 @@
 const Super = require('../models/super');
 const Matchup = require('../models/matchup')
-const URL = 'https://superheroapi.com/api/' + process.env.API_KEY + '/';
-const fetch = require("node-fetch");
-// const GetSupers = require('../util/GetSupers')
+const GetSuper = require('../util/ApiCall')
 
-function GetSupers() {
+async function GetSupers() {
     // Get a random number between 1 and 300
     function getRandomInt() {
         return Math.floor(Math.random() * 300) + 1
@@ -17,31 +15,16 @@ function GetSupers() {
         id2 + 1
     }
 
-    async function apiCall(id) {
-        return fetch(URL + id)
-    //         .then(response => {
-    //             console.log("Returns a response")
-    //             return response.json()
-    //         })
-    //         // .then(data => console.log(data))
-    //         .catch((error) => {
-    //             console.error('Error:', error);
-    //         });
-    }
-
     // console.log("hello")
-    hero1 = apiCall(id1)
-    hero2 = apiCall(id2)
-    Promise.all([hero1, hero2]).then(data => {
+    hero1 = GetSuper.apiCall(id1)
+    hero2 = GetSuper.apiCall(id2)
+    return Promise.all([hero1, hero2]).then(data => {
         const dataFromPromise1 = data[0]
         const dataFromPromise2 = data[1]
-        console.log(data[0].json())
-        console.log(data[1].json())
+        console.log(data[0])
+        console.log(data[1])
         return data
     })
-    // console.log(hero1.data)
-    // console.log(hero2.data)
-
 }
 
 module.exports = (app) => {
@@ -50,40 +33,34 @@ module.exports = (app) => {
         var currentUser = req.user;
 
         // console.log(req.cookies);
-        res.render('matchup', { currentUser });
+        res.render('index', { currentUser });
     })
     // New Matchup
-    app.get('/matchup/new', (req, res) => {
+    app.get('/matchup/new', async (req, res) => {
         var currentUser = req.user
         var matchup = new Matchup(req.body);
         matchup.upVotes = [];
         matchup.downVotes = [];
         matchup.voteScore = 0;
         
-        heroes = GetSupers()
+        heroes = await GetSupers()
         console.log(heroes)
         super1data = heroes[0]
         super2data = heroes[1]
 
         var super1 = {
-            // name: super1data.name,
-            // origin: super1data.connections,
-            // image: super1data.image.url,
+            name: super1data.name,
+            origin: super1data.connections,
+            image: super1data.image.url,
         }
 
         var super2 = {
-            // name: super2data,
-            // origin: super2data,
-            // image: super2data
+            name: super2data.name,
+            origin: super2data.connections,
+            image: super2data.image.url
         }
 
-        Super.find({}).lean()
-        .then(Super => {
-            res.render('matchup', { currentUser, super1, super2 });
-        })
-        .catch(err => {
-            console.log(err.message);
-        })
+        res.render('matchup', { currentUser, super1, super2 });
 
         matchup.save()
     })
