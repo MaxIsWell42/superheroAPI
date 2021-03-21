@@ -52,12 +52,14 @@ module.exports = (app) => {
             name: super1data.name,
             origin: super1data.connections,
             image: super1data.image.url,
+            id: super1data.id,
         }
 
         var super2 = {
             name: super2data.name,
             origin: super2data.connections,
-            image: super2data.image.url
+            image: super2data.image.url,
+            id: super2data.id,
         }
 
         res.render('matchup', { currentUser, super1, super2 });
