@@ -1,20 +1,47 @@
-<div class="row">
-    <div class="col-sm-4 col-sm-offset-3">
-        <a href="/super/{{super1.id}}" class="lead">{{super1.name}}</a>
-        <img src={{super1.image}}>
-        <p>From: {{super1.origin}}</p>
-        <form class="vote-up" data-id="{{this._id}}">
-            <button type="submit">Vote Up</button>
-        </form>
-    </div>
-    <div class="col-sm-4 col-sm-offset-3">
-        <a href="/super/{{super2.id}}" class="lead">{{super2.name}}</a>
-        <img src={{super2.image}}>
-        <div>
-            <p>From: {{super2.origin}}</p>
+<div class="row matchup-cards">
+    <div>
+        <div style="padding-top: 20px">
+            <div class="card">
+                <img src={{ super1data.image.url }} alt="Avatar" style="width:100%">
+                <div class="container">
+                    <h4><b><a href="/super/{{super1data.id}}">{{ super1data.name }}</a></b></h4> 
+                    <p style="font-weight:lighter">{{ super1data.biography.full-name }}</p> 
+                    <p style="right-side-text">{{ super1data.biography.publisher }}</p>
+                    <div style="border:2px solid black; text-align: center" class="stats">
+                        <h4>Stats</h4>
+                        <p>Intelligence: {{super1data.powerstats.intelligence}} | Strength: {{super1data.powerstats.strength}} | Speed: {{super1data.powerstats.speed}} </p>
+                                        <p style="font-size: 19px">Durability: {{super1data.powerstats.durability}} | Power: {{super1data.powerstats.power}} | Combat: {{super1data.powerstats.combat}} </p>
+                    </div>
+                </div>
+            </div>
         </div>
         <form class="vote-up" data-id="{{this._id}}">
             <button type="submit">Vote Up</button>
         </form>
+        <br>
+    </div>
+
+
+
+    <div>
+        <div style="padding-top: 30px">
+            <div class="card">
+                <img src={{ super2data.image.url }} alt="Avatar" style="width:100%">
+                <div class="container">
+                    <h4><b><a href="/super/{{super2data.id}}">{{ super2data.name }}</a></b></h4> 
+                    <p style="font-weight:lighter">{{ super2data.biography.full-name }}</p> 
+                    <p style="right-side-text">{{ super2data.biography.publisher }}</p>
+                    <div style="border:2px solid black; text-align: center" class="stats">
+                        <h4>Stats</h4>
+                        <p>Intelligence: {{super2data.powerstats.intelligence}} | Strength: {{super2data.powerstats.strength}} | Speed: {{super2data.powerstats.speed}} </p>
+                                        <p>Durability: {{super2data.powerstats.durability}} | Power: {{super2data.powerstats.power}} | Combat: {{super2data.powerstats.combat}} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form class="vote-up" data-id="{{this._id}}">
+            <button type="submit">Vote Up</button>
+        </form>
+        <br>
     </div>
 </div>

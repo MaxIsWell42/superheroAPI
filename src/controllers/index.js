@@ -6,4 +6,8 @@ module.exports = (app) => {
         // console.log(req.cookies);
         res.render('index', { currentUser });
     })
+
+    app.get('/search', (req, res) => {
+        
+    })
 }

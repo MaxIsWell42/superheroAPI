@@ -5,14 +5,14 @@ const GetSuper = require('../util/ApiCall')
 async function GetSupers() {
     // Get a random number between 1 and 300
     function getRandomInt() {
-        return Math.floor(Math.random() * 300) + 1
+        return Math.floor(Math.random() * 4) + 1
     }
 
     // Do this in function 
     var id1 = getRandomInt()
     var id2 = getRandomInt()
     if (id1 == id2) {
-        id2 + 1
+        id2 = id2 + 1
     }
 
     // console.log("hello")
@@ -48,31 +48,32 @@ module.exports = (app) => {
         super1data = heroes[0]
         super2data = heroes[1]
 
-        var super1 = {
-            name: super1data.name,
-            origin: super1data.connections,
-            image: super1data.image.url,
-            id: super1data.id,
-        }
+        // var super1 = {
+        //     name: super1data.name,
+        //     origin: super1data.connections['group-affiliation'],
+        //     image: super1data.image.url,
+        //     id: super1data.id,
+        //     stats: super1data.powerstats
+        // }
 
         var super2 = {
             name: super2data.name,
-            origin: super2data.connections,
+            origin: super2data.connections['group-affiliation'],
             image: super2data.image.url,
             id: super2data.id,
+            stats: super2data.powerstats
         }
 
-        res.render('matchup', { currentUser, super1, super2 });
+        res.render('matchup', { currentUser, super1data, super2data });
 
         matchup.save()
     })
 
-    app.put("/matchup/:id/vote-up", function(req, res) {
-        Post.findById(req.params.id).exec(function(err, post) {
+    app.put("/matchup/:id/vote-up1", function(req, res) {
+        Matchup.findById(req.params.id).exec(function(err, matchup) {
             matchup.upVotes.push(req.user._id);
-            post.voteScore = post.voteScore + 1;
-            post.save();
-
+            matchup.hero1voteScore = matchup.voteScore + 1;
+            matchup.save();
             res.status(200);
         });
     });

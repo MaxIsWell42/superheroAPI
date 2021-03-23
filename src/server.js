@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
 app.use(checkAuth);
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Engine
 app.engine('handlebars', exphbs({

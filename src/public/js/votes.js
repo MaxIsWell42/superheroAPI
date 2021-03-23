@@ -1,15 +1,31 @@
 $(document).ready(function() {
-    $(".vote-up").submit(function(e) {
+    $(".vote-up1").submit(function(e) {
         e.preventDefault();
-
+    
         var matchupId = $(this).data("id");
         $.ajax({
             type: "PUT",
+            url: "matchup/" + matchupId + "/vote-up",
             success: function(data) {
-            console.log("voted up!");
+                console.log("voted up!");
             },
             error: function(err) {
-            console.log(err.messsage);
+                console.log(err.messsage);
+            }
+        });
+    });
+    $(".vote-up2").submit(function(e) {
+        e.preventDefault();
+    
+        var matchupId = $(this).data("id");
+        $.ajax({
+            type: "PUT",
+            url: "matchup/" + matchupId + "/vote-up",
+            success: function(data) {
+                console.log("voted up!");
+            },
+            error: function(err) {
+                console.log(err.messsage);
             }
         });
     });
