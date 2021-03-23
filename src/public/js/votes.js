@@ -5,9 +5,9 @@ $(document).ready(function() {
         var matchupId = $(this).data("id");
         $.ajax({
             type: "PUT",
-            url: "matchup/" + matchupId + "/vote-up",
+            url: "matchup/" + matchupId + "/vote-up1",
             success: function(data) {
-                console.log("voted up!");
+                console.log("Voted super 1 up!");
             },
             error: function(err) {
                 console.log(err.messsage);
@@ -20,9 +20,9 @@ $(document).ready(function() {
         var matchupId = $(this).data("id");
         $.ajax({
             type: "PUT",
-            url: "matchup/" + matchupId + "/vote-up",
+            url: "matchup/" + matchupId + "/vote-up2",
             success: function(data) {
-                console.log("voted up!");
+                console.log("Voted super 2 up!");
             },
             error: function(err) {
                 console.log(err.messsage);

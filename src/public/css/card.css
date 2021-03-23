@@ -28,6 +28,17 @@
 
 .matchup-cards {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-between;
 }
+
+.show-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.centered-text {
+    text-align: center;
+}
+

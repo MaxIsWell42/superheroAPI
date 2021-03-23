@@ -1,17 +1,26 @@
-<div class="row">
-    <div class="col-lg-12" style="margin:auto; padding-top: 30px">
-        <div class="card">
-            <img src={{ hero.image.url }} alt="Avatar" style="width:100%">
-            <div class="container">
-                <h4><b>{{ hero.name }}</b></h4> 
-                <p style="font-weight:lighter">{{ hero.biography.full-name }}</p> 
-                <p style="right-side-text">{{ hero.biography.publisher }}</p>
-                <div style="border:2px solid black" class="stats">
-                    <h4 style="text-align:center">Stats</h4>
-                    <p class="stats">Intelligence: {{hero.powerstats.intelligence}} | Strength: {{hero.powerstats.strength}} | Speed: {{hero.powerstats.speed}} </p>
-                                    <p class="stats">Durability: {{hero.powerstats.durability}} | Power: {{hero.powerstats.power}} | Combat: {{hero.powerstats.combat}} </p>
-                </div>
+<div class="show-card" style="padding-top: 30px; padding-bottom: 30px">
+    <div class="card" style="width:60%">
+        <img src={{ hero.image.url }} alt="Avatar" style="width:100%">
+        <div class="container">
+            <h4><b>{{ hero.name }}</b></h4> 
+            <p style="font-weight:lighter">{{ hero.biography.full-name }}</p> 
+            <p style="right-side-text">{{ hero.biography.publisher }}</p>
+            <div style="border:2px solid black" class="stats">
+                <h4 class="centered-text">Stats</h4>
+                <p class="stats">Intelligence: {{hero.powerstats.intelligence}} | Strength: {{hero.powerstats.strength}} | Speed: {{hero.powerstats.speed}} </p>
+                                <p class="stats">Durability: {{hero.powerstats.durability}} | Power: {{hero.powerstats.power}} | Combat: {{hero.powerstats.combat}} </p>
             </div>
+            <br>
+            <h5 class="centered-text">Info</h5>
+            <p>Other Aliases: {{hero.biography.aliases}}</p>
+            <p>Alignment: {{hero.biography.alignment}}</p>
+            <p>Occupation: {{hero.work.occupation}}</p>
+            <p>Groups: {{hero.connections.group-affiliation}} </p>
+
+            <h5 class="centered-text">Appearance</h5>
+            <p>Race: {{hero.appearance.race}} | Gender: {{hero.appearance.gender}} | Hair Color: {{hero.appearance.hair-color}}</p>
+            <p>Height: {{hero.appearance.height}} | Weight: {{hero.appearance.weight}} | Eye Color: {{ hero.appearance.eye-color}}</p>
+            <p></p>
         </div>
     </div>
 </div>

@@ -1,1 +1,17 @@
-Log in and hit 'new matchup' to get started
+<body class="index">
+    <html class="blue"></html>
+    {{#if currentUser}}
+        {{!-- {{upVotes.find(currentUser._id)}}  --}}
+        <h1 class="centered-text"> Welcome to the Arena {{currentUser.username}} </h1>
+        <p class="centered-text">Hit New Matchup to get a fight!</p>
+        {{#each matchups}}
+            <div>
+                Hello
+                <p>{{this.hero1.name}}</p>
+                <p>{{this.hero2.name}}</p>
+            </div>
+        {{/each}}
+    {{else}}
+        Welcome to Super Duel. Log in to get started 
+    {{/if}}
+</body>
